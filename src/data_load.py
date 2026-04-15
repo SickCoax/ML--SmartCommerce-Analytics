@@ -9,7 +9,7 @@ sessions = pd.read_csv(r"C:\Users\sailj\OneDrive\文档\GitHub\SmartCommerce Ana
 df = pd.merge(transactions , customers , on="customer_id")
 df = pd.merge(df , products , on="product_id")
 
-df = df.drop(["product_id" , "transaction_date" , "signup_date" , "product_name" , "stock_quantity" , "weight_kg" , "category" , "brand"] , axis=1)
+df = df.drop(["product_id" , "transaction_date" , "signup_date" , "product_name" , "stock_quantity" , "discount_pct" ,  "weight_kg" , "category" , "brand"] , axis=1)
 
 ohe = OneHotEncoder(handle_unknown="ignore" , sparse_output=False)
 
@@ -28,7 +28,7 @@ df = pd.concat([df , encoded_status] , axis=1)
 df = df.groupby("customer_id").agg({
     "quantity" : "sum" ,
     "unit_price" : "mean" ,
-    "total_amount" : "sum" ,
+    "total_amount" : "sum" ,    
     "discount_applied" : ["sum" , "mean"] ,
     "shipping_cost" : ["sum" , "mean"] ,
     "age" : "first" ,
@@ -39,7 +39,6 @@ df = df.groupby("customer_id").agg({
     "price" : "mean" ,
     "avg_rating" : "mean" ,
     "num_ratings" : "mean" , 
-    "discount_pct" : "mean" ,
     "gender" : "first" ,
     "country" : "first" ,
     "segment" : "first" ,
