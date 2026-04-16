@@ -8,8 +8,6 @@ products = pd.read_csv(r"C:\Users\sailj\OneDrive\文档\GitHub\SmartCommerce Ana
 
 df = processed_dataset(customers , transactions , products)
 
-
-
 # while True :
 #     choice = int(input("Enter Your Choice : "))
 
