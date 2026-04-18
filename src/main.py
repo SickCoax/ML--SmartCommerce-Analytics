@@ -7,6 +7,8 @@ products = pd.read_csv(r"C:\Users\sailj\OneDrive\文档\GitHub\SmartCommerce Ana
 # sessions = pd.read_csv(r"C:\Users\sailj\OneDrive\文档\GitHub\SmartCommerce Analytics\dataset\sessions.csv")
 
 df = processed_dataset(customers , transactions , products)
+cat_cols = df.select_dtypes(include=["object" , "string"]).columns
+num_cols = df.select_dtypes(include=["number"]).columns
 
 # while True :
 #     choice = int(input("Enter Your Choice : "))
