@@ -4,7 +4,6 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder , StandardScaler
 from xgboost import XGBRegressor
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import mean_absolute_error
 
 
 def train_lifetime_value(df) :
@@ -39,7 +38,5 @@ def train_lifetime_value(df) :
     # The HyperParameter is done in HyperParameter Tunning notebook and found best values
 
     model = pipeline.fit(X_train , y_train)
-    
-    y_pred = model.predict(X_test)
 
-    return (model)
+    return model , X_test , y_test
