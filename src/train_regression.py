@@ -2,6 +2,10 @@ from data_preprocessing import get_feature_table
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder , StandardScaler
+from xgboost import XGBRegressor
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import mean_absolute_error
+
 
 def train_lifetime_value(df) :
 
@@ -15,3 +19,27 @@ def train_lifetime_value(df) :
 
     preprocess = ColumnTransformer([("cat" , OneHotEncoder(handle_unknown="ignore") , cat_cols) ,
                                     ("num" , StandardScaler() , num_cols)])
+    
+    pipeline = Pipeline([
+        ("preprocessing" , preprocess) ,
+        ("xgbr" , XGBRegressor(
+            n_jobs = -1 , 
+            random_state = 42 , 
+            subsample = 0.8 ,
+            max_depth = 5 ,
+            min_child_weight = 2 ,
+            gamma = 0.5375 ,
+            learning_rate = 0.0133 ,
+            reg_alpha = 0.0136 ,
+            reg_lambda = 2.229 ,
+            n_estimators = 373 ,
+        ))
+    ])
+
+    # The HyperParameter is done in HyperParameter Tunning notebook and found best values
+
+    model = pipeline.fit(X_train , y_train)
+    
+    y_pred = model.predict(X_test)
+
+    return (model)
