@@ -35,7 +35,7 @@ def train_lifetime_value(df) :
         ))
     ])
 
-    # The HyperParameter is done in HyperParameter Tunning notebook and found best values
+    # The HyperParameter is done in HyperParameter Tunning notebook and found the best parameters
 
     model = pipeline.fit(X_train , y_train)
 
