@@ -10,24 +10,73 @@ products = pd.read_csv(r"C:\Users\sailj\OneDrive\文档\GitHub\SmartCommerce Ana
 
 df = processed_dataset(customers , transactions , products)
 
-# model , X_test , y_test = train_lifetime_value(df)
 
-# y_pred , MAE = evaluate_reg(model , X_test , y_test)
 
-# print("Model Predictions : ")
-# print(y_pred)
+# model , X_test , y_test = train_is_churned(df)
+
+# ypred , f1 = evaluate_cls(model , X_test , y_test)
+
+# print(ypred)
 # print()
-# print(f"Mean Absolute Error : {MAE}")
+# print(f1)
 
-# while True :
-#     choice = int(input("Enter Your Choice : "))
+while True :
 
+    print("Choice :     Task")
+    print(" {1}   : Lifetime Value")
+    print(" {2}   :   Is Churned")
+    print(" {3}   :     EXIT")
+    print()
 
-model , X_test , y_test = train_is_churned(df)
+    try :
 
-ypred , f1 = evaluate_cls(model , X_test , y_test)
+        choice = int(input("Enter Your Choice : "))
+        print()    
 
-print(ypred)
-print()
-print(f1)
+        match choice :
 
+            case 1 :
+                model , X_test , y_test = train_lifetime_value(df)
+                y_pred , MAE = evaluate_reg(model , X_test , y_test)
+
+                print("----------------------------------------------")
+                print("Model Predictions : ")
+                print(y_pred)
+                print()
+                print(f"Mean Absolute Error : {MAE}")
+                print()
+                print("SUCCESFULLY DONE")
+                print("----------------------------------------------")
+                print()
+            
+            case 2 :
+                model , X_test , y_test = train_is_churned(df)
+                ypred , f1 = evaluate_cls(model , X_test , y_test)
+
+                print("----------------------------------------------")
+                print("Model Predictions : ")
+                print(ypred)
+                print()
+                print(f"F1 Score : {f1}")
+                print()
+                print("SUCCESFULLY DONE")
+                print("----------------------------------------------")
+                print()
+            
+            case 3 :
+                print("----------------------------------------------")
+                print("EXITED")
+                print("----------------------------------------------")
+                break
+
+            case _ :
+                print("----------------------------------------------")
+                print("INVALID OPTION")
+                print("----------------------------------------------")
+                print()
+
+    except ValueError :
+        print("----------------------------------------------")
+        print("INVALID OPTION")
+        print("----------------------------------------------")
+        print()
