@@ -15,4 +15,6 @@ def train_is_churned(df) :
     X_train , X_test , y_train , y_test = train_test_split(X , y , test_size=0.2 , random_state=42)
 
     preprocess = ColumnTransformer([("cat" , OneHotEncoder(handle_unknown="ignore") , cat_cols) ,
-                                    ("num" , StandardScaler() , num_cols)])    
+                                    ("num" , StandardScaler() , num_cols)])
+    
+    
